@@ -55,7 +55,7 @@ class Bot : TelegramLongPollingBot() {
             val json = gson.toJson(update)
             val globals = JsePlatform.standardGlobals()
             val chunk = globals.load("" +
-                    "json = require 'scripts/json'\n" +
+                    "json = require 'scripts/DATASTORE'\n" +
                     "bot = require 'scripts/bot'\n" +
                     "local c = (json.parse(({...})[1]))\n" +
                     "bot.cmd(c)")
