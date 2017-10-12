@@ -1,7 +1,18 @@
 local json = {}
 local DATA = require( 'net.nander.botproject.integrations.Mongol' )
 
+-- Our Shit
+json.getData = function(a, b)
+    local myData = DATA.getData("asdf4","data")
+    local b = json.parse(myData)
+    return b
+end
+json.setData = function(a,b,c)
+    print("HERE",c)
+    DATA.setData(a,b,json.stringify(c))
+end
 
+-- Their SHIT
 -- Internal functions.
 
 local function kind_of(obj)
@@ -144,13 +155,5 @@ function json.parse(str, pos, end_delim)
         error('Invalid json syntax starting at ' .. pos_info_str)
     end
 end
-json.getData = function(a, b)
-    local myData = DATA.getData("asdf4","data")
-    local b = json.parse(myData)
-    return b
-end
-json.setData = function(a,b,c)
-    print("HERE",c)
-    DATA.setData(a,b,json.stringify(c))
-end
+
 return json

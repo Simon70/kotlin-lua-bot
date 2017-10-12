@@ -1,9 +1,8 @@
 local bot = {}
+local DATA = require( 'scripts.DATASTORE' )
 
-
--- Internal functions.
+-- Bot Commands
 bot.cmd = function(update)
-    local DATA = require( 'scripts.DATASTORE' )
     print("FIRST",type(DATA.getData("asdf4","data")))
     DATA.setData("asdf4","data",{asdf="asdf"})
     print("SECOND",DATA.getData("asdf4","data")["asdf"])
