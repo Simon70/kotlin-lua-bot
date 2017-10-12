@@ -1,4 +1,4 @@
-package org.simonscode.servicemonitorbot
+package net.nander.botproject
 
 import de.thjom.java.systemd.Systemd
 import de.thjom.java.systemd.Unit

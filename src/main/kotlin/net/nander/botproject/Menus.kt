@@ -1,4 +1,4 @@
-package org.simonscode.servicemonitorbot
+package net.nander.botproject
 
 import org.telegram.telegrambots.api.methods.BotApiMethod
 import org.telegram.telegrambots.api.methods.send.SendMessage
