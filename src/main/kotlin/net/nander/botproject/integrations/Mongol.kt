@@ -2,7 +2,6 @@ package net.nander.botproject.integrations
 
 import net.nander.botproject.mongo.MongolDatabaseConnector
 import org.bson.Document
-import org.luaj.vm2.lib.OneArgFunction
 import org.luaj.vm2.lib.TwoArgFunction
 
 import org.luaj.vm2.LuaValue
