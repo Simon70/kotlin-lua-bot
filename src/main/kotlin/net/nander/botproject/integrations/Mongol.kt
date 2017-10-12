@@ -24,7 +24,6 @@ class Mongol : TwoArgFunction() {
             val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
             if (Doc.first() == null)
                 return LuaValue.NIL
-
             val a =Doc.first()[file.toString()].toString()
             if(a == "null")
                 return LuaValue.NIL
