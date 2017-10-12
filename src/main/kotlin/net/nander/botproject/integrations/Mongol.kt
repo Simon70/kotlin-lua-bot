@@ -3,15 +3,15 @@ package net.nander.botproject.integrations
 import net.nander.botproject.mongo.MongolDatabaseConnector
 import org.bson.Document
 import org.luaj.vm2.lib.TwoArgFunction
-
 import org.luaj.vm2.LuaValue
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
 import org.luaj.vm2.lib.ThreeArgFunction
 
+@Suppress("unused")
 class Mongol : TwoArgFunction() {
 
-    override fun call(modname: LuaValue, env: LuaValue?): LuaValue {
+    override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
         val library = LuaValue.tableOf()
         library.set("getData", getData())
         library.set("setData", setData())
