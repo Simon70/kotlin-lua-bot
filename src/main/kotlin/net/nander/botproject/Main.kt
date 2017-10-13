@@ -1,15 +1,14 @@
 package net.nander.botproject
 
+import com.google.gson.Gson
+import org.luaj.vm2.lib.jse.JsePlatform
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import org.telegram.telegrambots.exceptions.TelegramApiException
 import java.io.File
 import java.nio.charset.Charset
-import com.google.gson.Gson
-import org.luaj.vm2.lib.jse.JsePlatform
-import org.telegram.telegrambots.exceptions.TelegramApiException
-import org.telegram.telegrambots.api.methods.send.SendMessage
 
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
@@ -20,9 +19,11 @@ class Bot : TelegramLongPollingBot() {
     private var config = File("config.properties")
     private var token: String? = null
     private var username: String? = null
+
     companion object {
         var server: TelegramLongPollingBot? = null
     }
+
     init {
         server = this
         if (config.exists()) {

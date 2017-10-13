@@ -1,8 +1,6 @@
 package net.nander.botproject.integrations
 
-import com.google.gson.Gson
 import net.nander.botproject.Bot
-
 import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.ThreeArgFunction
 import org.luaj.vm2.lib.TwoArgFunction

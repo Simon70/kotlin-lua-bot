@@ -1,12 +1,12 @@
 package net.nander.botproject.integrations
 
-import net.nander.botproject.mongo.MongolDatabaseConnector
-import org.bson.Document
-import org.luaj.vm2.lib.TwoArgFunction
-import org.luaj.vm2.LuaValue
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
+import net.nander.botproject.mongo.MongolDatabaseConnector
+import org.bson.Document
+import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.ThreeArgFunction
+import org.luaj.vm2.lib.TwoArgFunction
 
 @Suppress("unused")
 class Mongol : TwoArgFunction() {
@@ -25,15 +25,15 @@ class Mongol : TwoArgFunction() {
             val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
             if (Doc.first() == null)
                 return LuaValue.NIL
-            val a =Doc.first()[file.toString()].toString()
-            if(a == "null")
+            val a = Doc.first()[file.toString()].toString()
+            if (a == "null")
                 return LuaValue.NIL
             return LuaValue.valueOf(a)
         }
     }
 
     internal class setData : ThreeArgFunction() {
-        override fun call(x: LuaValue?,file: LuaValue?, y: LuaValue?): LuaValue {
+        override fun call(x: LuaValue?, file: LuaValue?, y: LuaValue?): LuaValue {
             val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
             if (Doc.first() == null)
                 MongolDatabaseConnector.collection.insertOne(Document("title", x.toString()).append(file.toString(), y.toString()))

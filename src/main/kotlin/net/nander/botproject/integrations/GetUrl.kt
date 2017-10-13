@@ -1,10 +1,10 @@
 package net.nander.botproject.integrations
 
-import org.luaj.vm2.lib.TwoArgFunction
 import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.OneArgFunction
-import java.io.InputStreamReader
+import org.luaj.vm2.lib.TwoArgFunction
 import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.net.URL
 
 @Suppress("unused")

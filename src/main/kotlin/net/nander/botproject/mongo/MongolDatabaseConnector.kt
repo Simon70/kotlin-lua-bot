@@ -9,6 +9,7 @@ import org.bson.Document
  */
 object MongolDatabaseConnector {
     val collection: MongoCollection<Document>
+
     init {
         val mongo = MongoClient("localhost", 27017)
         println("Connected to the database successfully")
