@@ -9,6 +9,7 @@ PLAYER.setName = {
     validator = scripts.onlyHuman,
     call = function(l, update, player, location, world)
         player.name = l[2]
+        player.id = update.message.chat.id
         DATA.setDataFromChat("Player", update, player)
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "SET NAME TO " .. player.name)
     end

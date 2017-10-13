@@ -8,7 +8,7 @@ TELEGRAM = require('net.nander.botproject.integrations.Telegram')
 
 local commands = {}
 local helper = require 'scripts.helpers.scripts'
-
+helper.addCommands(commands, require 'scripts.commands.say')
 helper.addCommands(commands, require 'scripts.commands.player')
 helper.addCommands(commands, require 'scripts.commands.location')
 local PLE = require 'scripts.entities.player'
@@ -27,6 +27,7 @@ bot.cmd = function(update)
         print("Thanks for trying")
         return
     end
+
     local P = PLE.getPlayer(update)
     local L = LLE.getLocation(P)
     local W = WLE.getWorld(P)

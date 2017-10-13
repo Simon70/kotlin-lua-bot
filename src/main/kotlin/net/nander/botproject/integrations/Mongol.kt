@@ -5,6 +5,7 @@ import com.mongodb.client.model.Updates
 import net.nander.botproject.mongo.MongolDatabaseConnector
 import org.bson.Document
 import org.luaj.vm2.LuaValue
+import org.luaj.vm2.lib.OneArgFunction
 import org.luaj.vm2.lib.ThreeArgFunction
 import org.luaj.vm2.lib.TwoArgFunction
 
@@ -14,6 +15,8 @@ class Mongol : TwoArgFunction() {
     override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
         val library = LuaValue.tableOf()
         library.set("getData", getData())
+        library.set("getAllData", getAllData())
+
         library.set("setData", setData())
 
         env!!.set("mongo", library)
@@ -29,6 +32,32 @@ class Mongol : TwoArgFunction() {
             if (a == "null")
                 return LuaValue.NIL
             return LuaValue.valueOf(a)
+        }
+    }
+
+    internal class getAllData : OneArgFunction() {
+        override fun call(x: LuaValue?): LuaValue {
+            val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
+            val d = Doc.iterator().next()
+            val e =  d.iterator()
+            var str = "{"
+            var first = 2
+            var second = true
+            while(e.hasNext())
+            {
+                val f = e.next()
+                if(first <= 0) {
+                    if(!second)
+                        str += ","
+                    str += f.key + ":"+f.value
+                    second = false
+                }
+
+                first --
+            }
+            str += "}"
+            println(str)
+            return LuaValue.valueOf(str)
         }
     }
 
