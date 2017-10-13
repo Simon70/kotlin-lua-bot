@@ -1,9 +1,5 @@
 --
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 13-10-17
--- Time: 13:19
--- To change this template use File | Settings | File Templates.
+-- Defines what can be done with a player object. Currently only getPlayer
 --
 
 local PLAYER = {}
@@ -18,4 +14,5 @@ PLAYER.getPlayer = function(update)
     end
     return d
 end
+
 return PLAYER

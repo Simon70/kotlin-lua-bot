@@ -1,12 +1,9 @@
 --
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 13-10-17
--- Time: 20:59
--- To change this template use File | Settings | File Templates.
+-- Defines which actions can be taken within the context of player
 --
 local PLAYER = {}
 local scripts = require 'scripts.helpers.scripts'
+
 PLAYER.setName = {
     name = "setName",
     validator = scripts.onlyHuman,
@@ -16,6 +13,7 @@ PLAYER.setName = {
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "SET NAME TO " .. player.name)
     end
 }
+
 PLAYER.who = {
     name = "who",
     validator = scripts.onlyHuman,
@@ -23,4 +21,5 @@ PLAYER.who = {
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Your name is " .. player.name)
     end
 }
+
 return PLAYER

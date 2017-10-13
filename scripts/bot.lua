@@ -1,3 +1,7 @@
+--
+-- Main entry point for bot
+--
+
 local bot = {}
 DATA = require('scripts.DATASTORE')
 TELEGRAM = require('net.nander.botproject.integrations.Telegram')
@@ -11,9 +15,6 @@ local PLE = require 'scripts.entities.player'
 local LLE = require 'scripts.entities.location'
 local WLE = require 'scripts.entities.world'
 
-
--- Bot Commands
-
 local function execute(func, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
         func.call(var, update, P, L, W)
@@ -26,7 +27,6 @@ bot.cmd = function(update)
         print("Thanks for trying")
         return
     end
-
     local P = PLE.getPlayer(update)
     local L = LLE.getLocation(P)
     local W = WLE.getWorld(P)

@@ -1,9 +1,5 @@
 --
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 13-10-17
--- Time: 21:02
--- To change this template use File | Settings | File Templates.
+-- Defines which commands can be typed in the context of location
 --
 local LOCATION = {}
 local COMMANDS = require 'scripts.helpers.command'

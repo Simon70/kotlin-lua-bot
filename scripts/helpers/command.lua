@@ -1,9 +1,5 @@
 --
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 13-10-17
--- Time: 21:26
--- To change this template use File | Settings | File Templates.
+-- Defines helper-function-generators for type-check functions
 --
 
 local COMMANDTYPES = {}
@@ -13,6 +9,7 @@ COMMANDTYPES.zeroArg = function(arg)
         return #var == 1 and var[1] == arg, var
     end
 end
+
 COMMANDTYPES.oneArg = function(arg, typ)
     return function(var)
 
@@ -20,6 +17,7 @@ COMMANDTYPES.oneArg = function(arg, typ)
         return #var == 2 and var[1] == arg and type(var[1]) == typ, var
     end
 end
+
 COMMANDTYPES.arbyArg = function(arg)
     return function(var)
         if #var <= 1 or var[1] ~= arg then
@@ -32,4 +30,5 @@ COMMANDTYPES.arbyArg = function(arg)
         return true, { var[1], s }
     end
 end
+
 return COMMANDTYPES

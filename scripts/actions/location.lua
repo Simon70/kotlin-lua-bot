@@ -1,9 +1,5 @@
 --
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 13-10-17
--- Time: 21:02
--- To change this template use File | Settings | File Templates.
+-- Defines which actions can be taken within the context of location
 --
 local LOCATION = {}
 local LLE = require 'scripts.entities.location'
@@ -18,4 +14,5 @@ LOCATION.teleport = {
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Set Location to " .. l[2])
     end
 }
+
 return LOCATION
