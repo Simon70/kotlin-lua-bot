@@ -9,10 +9,12 @@
 local PLAYER = {}
 
 PLAYER.getPlayer =  function(update)
-    local d = DATA.getDataFromChat("Player", update.message)
+    print("inb4")
+    local d = DATA.getDataFromChat("Player", update)
+    print("inb4")
     if not d then
         d = {name ="YOUR NAME HERE"}
-        DATA.setDataFromChat("Player", update.message, d)
+        DATA.setDataFromChat("Player", update, d)
     end
     return d
 end

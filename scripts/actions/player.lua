@@ -6,22 +6,19 @@
 -- To change this template use File | Settings | File Templates.
 --
 local PLAYER = {}
-local PLE = require 'scripts.entities.player'
 local scripts = require 'scripts.helpers.scripts'
-PLAYER.setName = {
+PLAYER.setName = { name="setName",
     validator = scripts.onlyHuman,
-    call = function(l, update)
-        local d = PLE.getPlayer(update)
-        d.name = l[2]
-        DATA.setDataFromChat("Player", update.message, d)
-        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "SET NAME TO " .. l[2])
+    call = function(l, update, player, location, world)
+        player.name = l[2]
+        DATA.setDataFromChat("Player", update, player)
+        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "SET NAME TO " .. player.name)
     end
 }
-PLAYER.who = {
+PLAYER.who = { name="who",
     validator = scripts.onlyHuman,
-    call = function(l, update)
-        local d = PLE.getPlayer(update)
-        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Your name is " .. d.name)
+    call = function(l, update, player, location, world)
+        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Your name is " .. player.name)
     end
 }
 return PLAYER

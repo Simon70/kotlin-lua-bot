@@ -17,4 +17,9 @@ end
 function scripts.onlyHuman(var, update)
     return update.message.chat.id > 0
 end
+function scripts.addCommands(cmd, newc)
+    for k,v in ipairs(newc) do
+        cmd[#cmd+1] = v
+    end
+end
 return scripts

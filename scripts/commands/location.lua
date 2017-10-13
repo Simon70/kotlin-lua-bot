@@ -7,7 +7,8 @@
 --
 local LOCATION = {}
 local COMMANDS = require 'scripts.helpers.command'
+local LLA      = require 'scripts.actions.location'
 
-LOCATION.teleport = COMMANDS.oneArg
+LOCATION[#LOCATION+1] = {COMMANDS.oneArg("/teleport", type("ASDF")), LLA.teleport }
 
-return PLAYER
+return LOCATION

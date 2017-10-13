@@ -8,6 +8,7 @@
 local COMMANDS = require 'scripts.helpers.command'
 local PLA      = require 'scripts.actions.player'
 local PLAYER = {}
+
 PLAYER[#PLAYER+1] = {COMMANDS.zeroArg("/who"), PLA.who }
 PLAYER[#PLAYER+1] = {COMMANDS.arbyArg("/setName"), PLA.setName}
 

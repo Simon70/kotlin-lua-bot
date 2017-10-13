@@ -10,11 +10,16 @@ local COMMANDTYPES = {}
 
 COMMANDTYPES.zeroArg = function(arg)
     return function(var)
-        print(arg, var, #var == 1 and var[1] == arg)
         return #var == 1 and var[1] == arg, var
     end
 end
+COMMANDTYPES.oneArg = function(arg, typ)
+    return function(var)
 
+        print("HERE", #var == 2, var[1] == arg, type(var[1]), typ)
+        return #var == 2 and var[1] == arg and type(var[1]) == typ , var
+    end
+end
 COMMANDTYPES.arbyArg = function(arg)
     return function(var)
         if #var <= 1 or var[1] ~= arg then

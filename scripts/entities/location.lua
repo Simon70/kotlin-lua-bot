@@ -9,8 +9,9 @@
 local scripts = require 'scripts.helpers.scripts'
 local LOCATION = {}
 
-LOCATION.getLocation =  function(player, update)
-    local d = DATA.getDataFromChat("Location", player.location)
+LOCATION.getLocation =  function(player)
+    local l = player.location or "NULLLAND"
+    local d = DATA.getData("Location", player.location )
     return d
 end
 

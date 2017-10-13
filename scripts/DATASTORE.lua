@@ -7,15 +7,15 @@ json.getData = function(a, b)
     local b = json.parse(myData)
     return b
 end
-json.getDataFromChat = function (a, message)
-    return json.getData(a, message.chat.id)
+json.getDataFromChat = function (a, update)
+    return json.getData(a, update.message.chat.id)
 end
 
 json.setData = function(a, b, c)
     DATA.setData(a, b, json.stringify(c))
 end
-json.setDataFromChat = function(a, message, c)
-    json.setData(a, message.chat.id, c)
+json.setDataFromChat = function(a, update, c)
+    json.setData(a, update.message.chat.id, c)
 end
 
 -- Their SHIT
