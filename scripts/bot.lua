@@ -1,10 +1,10 @@
 local bot = {}
-local DATA = require( 'scripts.DATASTORE' )
-
+local DATA = require('scripts.DATASTORE')
+local TELEGRAM = require('net.nander.botproject.integrations.Telegram')
+local echo = require('scripts.bots.echobot')
 -- Bot Commands
 bot.cmd = function(update)
-    print("FIRST",type(DATA.getData("asdf4","data")))
-    DATA.setData("asdf4","data",{asdf="asdf"})
-    print("SECOND",DATA.getData("asdf4","data")["asdf"])
+    echo(update)
+
 end
 return bot

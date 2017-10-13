@@ -13,7 +13,6 @@ class GetUrl : TwoArgFunction() {
     override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
         val library = LuaValue.tableOf()
         library.set("GET", GET())
-
         env!!.set("mongo", library)
         return library
     }
@@ -26,10 +25,8 @@ class GetUrl : TwoArgFunction() {
                     InputStreamReader(
                             conn.getInputStream()))
             val inputAsString = reader.use { it.readText() }
-
             reader.close()
             return LuaValue.valueOf(inputAsString)
         }
     }
-
 }

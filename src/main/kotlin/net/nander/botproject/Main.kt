@@ -8,6 +8,8 @@ import java.io.File
 import java.nio.charset.Charset
 import com.google.gson.Gson
 import org.luaj.vm2.lib.jse.JsePlatform
+import org.telegram.telegrambots.exceptions.TelegramApiException
+import org.telegram.telegrambots.api.methods.send.SendMessage
 
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
@@ -18,8 +20,11 @@ class Bot : TelegramLongPollingBot() {
     private var config = File("config.properties")
     private var token: String? = null
     private var username: String? = null
-
+    companion object {
+        var server: TelegramLongPollingBot? = null
+    }
     init {
+        server = this
         if (config.exists()) {
             val lines = config.readLines(Charset.defaultCharset())
             if (lines.size >= 2) {
@@ -60,8 +65,12 @@ class Bot : TelegramLongPollingBot() {
                     "local c = (json.parse(({...})[1]))\n" +
                     "bot.cmd(c)")
             chunk.call(json)
+
+            try {
+
+            } catch (e: TelegramApiException) {
+                e.printStackTrace()
+            }
         }
     }
-
-
 }
