@@ -12,7 +12,6 @@ object MongolDatabaseConnector {
 
     init {
         val mongo = MongoClient("localhost", 27017)
-        println("Connected to the database successfully")
 
         // Accessing the database
         val database = mongo.getDatabase("myDb")

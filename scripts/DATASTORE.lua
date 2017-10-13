@@ -121,6 +121,9 @@ json.null = {} -- This is a one-off table to represent the null value.
 
 function json.parse(str, pos, end_delim)
     pos = pos or 1
+    if not str then
+        return nil
+    end
     if pos > #str then error('Reached unexpected end of input.') end
     local pos = pos + #str:match('^%s*', pos) -- Skip whitespace.
     local first = str:sub(pos, pos)
