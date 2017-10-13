@@ -8,18 +8,24 @@
 local DATA = require('scripts.DATASTORE')
 local TELEGRAM = require('net.nander.botproject.integrations.Telegram')
 
+
 return function(update)
     if update.message.chat.id == -1001050885996 then
         return
     end
-    if(update.message.text =="@echo on") then
-        DATA.setDataFromChat("@echo",update.message,{true})
+    if (update.message.text == "@echo on") then
+        DATA.setDataFromChat("@echo", update.message, { true })
+        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Echo turned on")
+        return
     end
-    if(update.message.text =="@echo off") then
-        DATA.setDataFromChat("@echo",update.message,{false})
+    if (update.message.text == "@echo off") then
+        DATA.setDataFromChat("@echo", update.message, { false })
+        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Echo turned off")
+        return
     end
     local d = DATA.getDataFromChat("@echo", update.message)
     if d and d[1] then
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, update.message.text)
     end
 end
+
