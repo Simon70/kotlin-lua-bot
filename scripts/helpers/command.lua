@@ -12,8 +12,6 @@ end
 
 COMMANDTYPES.oneArg = function(arg, typ)
     return function(var)
-
-        print("HERE", #var == 2, var[1] == arg, type(var[1]), typ)
         return #var == 2 and var[1] == arg and type(var[1]) == typ, var
     end
 end
