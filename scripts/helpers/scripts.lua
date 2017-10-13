@@ -11,6 +11,7 @@ function scripts.split(str)
     return arr
 end
 
+
 function scripts.onlyHuman(_, update)
     return update.message.chat.id > 0
 end

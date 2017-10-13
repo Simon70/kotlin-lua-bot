@@ -11,8 +11,8 @@ SAY.say = {
         local d = DATA.getAllData("Player")
         for k, v in pairs(d) do
             print(v.location, player.location)
-            if (v.location == player.location) then
-                TELEGRAM.sendMessage(update.message.chat.id, player.name..": "..l[2])
+            if (v.location == player.location and k ~= player.id) then
+                TELEGRAM.sendMessage(k, player.name..": "..l[2])
             end
         end
     end

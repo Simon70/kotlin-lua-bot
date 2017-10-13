@@ -5,6 +5,6 @@ local COMMANDS = require 'scripts.helpers.command'
 local SLA = require 'scripts.actions.say'
 local SAY = {}
 
-SAY[#SAY + 1] = { COMMANDS.arbyArg("/say"), SLA.say }
+SAY[#SAY + 1] = { COMMANDS.noCommand(), SLA.say }
 
 return SAY
