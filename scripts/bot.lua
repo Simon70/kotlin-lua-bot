@@ -27,6 +27,7 @@ bot.cmd = function(update)
         print("Thanks for trying")
         return
     end
+    update.message.text = update.message.text:gsub("u0027", "'")
 
     local P = PLE.getPlayer(update)
     local L = LLE.getLocation(P)

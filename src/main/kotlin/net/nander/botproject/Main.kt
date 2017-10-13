@@ -58,8 +58,9 @@ class Bot : TelegramLongPollingBot() {
     override fun onUpdateReceived(update: Update?) {
         if (update != null) {
             val gson = Gson()
-            val json = gson.toJson(update)
+            var json = gson.toJson(update)
             val globals = JsePlatform.standardGlobals()
+
             val chunk = globals.load("" +
                     "json = require 'scripts/DATASTORE'\n" +
                     "bot = require 'scripts/bot'\n" +
