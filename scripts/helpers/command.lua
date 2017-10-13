@@ -17,7 +17,7 @@ COMMANDTYPES.oneArg = function(arg, typ)
     return function(var)
 
         print("HERE", #var == 2, var[1] == arg, type(var[1]), typ)
-        return #var == 2 and var[1] == arg and type(var[1]) == typ , var
+        return #var == 2 and var[1] == arg and type(var[1]) == typ, var
     end
 end
 COMMANDTYPES.arbyArg = function(arg)
@@ -26,10 +26,10 @@ COMMANDTYPES.arbyArg = function(arg)
             return false
         end
         local s = var[2]
-        for i=3, #var do
-            s = s .. " "..var[i]
+        for i = 3, #var do
+            s = s .. " " .. var[i]
         end
-        return true, {var[1], s}
+        return true, { var[1], s }
     end
 end
 return COMMANDTYPES

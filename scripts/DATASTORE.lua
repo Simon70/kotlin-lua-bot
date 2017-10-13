@@ -7,7 +7,7 @@ json.getData = function(a, b)
     local b = json.parse(myData)
     return b
 end
-json.getDataFromChat = function (a, update)
+json.getDataFromChat = function(a, update)
     return json.getData(a, update.message.chat.id)
 end
 

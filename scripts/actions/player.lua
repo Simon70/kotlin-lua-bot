@@ -7,7 +7,8 @@
 --
 local PLAYER = {}
 local scripts = require 'scripts.helpers.scripts'
-PLAYER.setName = { name="setName",
+PLAYER.setName = {
+    name = "setName",
     validator = scripts.onlyHuman,
     call = function(l, update, player, location, world)
         player.name = l[2]
@@ -15,7 +16,8 @@ PLAYER.setName = { name="setName",
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "SET NAME TO " .. player.name)
     end
 }
-PLAYER.who = { name="who",
+PLAYER.who = {
+    name = "who",
     validator = scripts.onlyHuman,
     call = function(l, update, player, location, world)
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Your name is " .. player.name)
