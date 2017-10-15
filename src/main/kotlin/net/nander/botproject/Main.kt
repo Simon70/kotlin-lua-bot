@@ -27,7 +27,6 @@ class Bot : TelegramLongPollingBot() {
         var server: TelegramLongPollingBot? = null
         val messageQueue: LinkedBlockingQueue<Update> = LinkedBlockingQueue()
         val gson = Gson()
-
     }
 
     init {

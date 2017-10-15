@@ -21,7 +21,7 @@ class Telegram : TwoArgFunction() {
         library.set("sendMessage", sendMessage())
         library.set("sendReplyMessage", sendReplyMessage())
         library.set("getNextMessage", getNextMessage())
-        env!!.set("sendMessage", library)
+        env!!.set("telegram", library)
         return library
     }
 
