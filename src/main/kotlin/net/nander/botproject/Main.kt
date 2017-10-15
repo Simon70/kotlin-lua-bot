@@ -54,14 +54,8 @@ class Bot : TelegramLongPollingBot() {
 
         object : Thread() {
             override fun run() {
-                val globals = JsePlatform.standardGlobals()
-
-                val chunk = globals.load("" +
-                        "json = require 'scripts/DATASTORE'\n" +
-                        "bot = require 'scripts/bot'\n" +
-                        "local c = (json.parse(({...})[1]))\n" +
-                        "bot.start()")
-                chunk.call()            }
+                JsePlatform.standardGlobals().load("require 'scripts/bot'.start()").call()
+            }
         }.start()
 
     }

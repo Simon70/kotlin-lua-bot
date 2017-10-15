@@ -5,6 +5,7 @@ local TICKRATE = 100
 local bot = {}
 DATA = require('scripts.DATASTORE')
 TELEGRAM = require('net.nander.botproject.integrations.Telegram')
+json = require 'scripts/DATASTORE'
 
 local commands = {}
 local helper = require 'scripts.helpers.scripts'
