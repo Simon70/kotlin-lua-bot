@@ -26,7 +26,6 @@ bot.start = function()
     while(true) do
         local msg = json.parse(TELEGRAM.getNextMessage(TICKRATE))
         if(msg ~= nil) then
-            print(msg)
             bot.cmd(msg)
         else
             bot.tick()
@@ -35,7 +34,6 @@ bot.start = function()
 end
 
 bot.tick = function()
-    print("HERE")
 end
 
 bot.cmd = function(update)

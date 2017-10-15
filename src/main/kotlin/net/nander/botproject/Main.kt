@@ -26,6 +26,7 @@ class Bot : TelegramLongPollingBot() {
     companion object {
         var server: TelegramLongPollingBot? = null
         val messageQueue: LinkedBlockingQueue<Update> = LinkedBlockingQueue()
+        val gson = Gson()
 
     }
 
