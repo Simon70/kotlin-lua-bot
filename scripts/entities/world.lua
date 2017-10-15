@@ -4,7 +4,7 @@
 
 local WORLD = {}
 
-WORLD.getWorld = function(P)
+WORLD.getWorld = function(_)
     return { name = "Terra" }
 end
 

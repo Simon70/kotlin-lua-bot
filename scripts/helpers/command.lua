@@ -15,11 +15,13 @@ COMMANDTYPES.oneArg = function(arg, typ)
         return #var == 2 and var[1] == arg and type(var[1]) == typ, var
     end
 end
+
 COMMANDTYPES.noCommand = function()
-    return function(var, str)
-        return string.sub(str, 1, 1)~="/", {"/say", str}
+    return function(_, str)
+        return string.sub(str, 1, 1) ~= "/", { "/say", str }
     end
 end
+
 COMMANDTYPES.arbyArg = function(arg)
     return function(var)
         if #var <= 1 or var[1] ~= arg then

@@ -39,21 +39,20 @@ class Mongol : TwoArgFunction() {
         override fun call(x: LuaValue?): LuaValue {
             val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
             val d = Doc.iterator().next()
-            val e =  d.iterator()
+            val e = d.iterator()
             var str = "{"
             var first = 2
             var second = true
-            while(e.hasNext())
-            {
+            while (e.hasNext()) {
                 val f = e.next()
-                if(first <= 0) {
-                    if(!second)
+                if (first <= 0) {
+                    if (!second)
                         str += ","
-                    str += f.key + ":"+f.value
+                    str += f.key + ":" + f.value
                     second = false
                 }
 
-                first --
+                first--
             }
             str += "}"
             println(str)

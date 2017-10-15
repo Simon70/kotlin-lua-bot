@@ -87,7 +87,6 @@ local function parse_num_val(str, pos)
     return val, pos + #num_str
 end
 
-
 -- Public values and functions.
 
 function json.stringify(obj, as_key)

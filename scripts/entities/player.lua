@@ -4,6 +4,7 @@
 
 local PLAYER = {}
 
+-- Gets player data, and creates a player entity if this is the first time this is called.
 PLAYER.getPlayer = function(update)
     local d = DATA.getDataFromChat("Player", update)
     if not d then

@@ -15,7 +15,7 @@ local PLE = require 'scripts.entities.player'
 local LLE = require 'scripts.entities.location'
 local WLE = require 'scripts.entities.world'
 
-local function execute(func, str, var, update, P, L, W)
+local function execute(func, _, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
         func.call(var, update, P, L, W)
         print("Calling", func.name)
