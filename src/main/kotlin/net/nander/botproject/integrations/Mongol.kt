@@ -2,6 +2,7 @@ package net.nander.botproject.integrations
 
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
+import net.nander.botproject.Bot
 import net.nander.botproject.mongo.MongolDatabaseConnector
 import org.bson.Document
 import org.luaj.vm2.LuaValue
@@ -9,7 +10,7 @@ import org.luaj.vm2.lib.OneArgFunction
 import org.luaj.vm2.lib.ThreeArgFunction
 import org.luaj.vm2.lib.TwoArgFunction
 
-@Suppress("unused")
+@Suppress("unused", "ClassName")
 class Mongol : TwoArgFunction() {
 
     override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
@@ -43,6 +44,7 @@ class Mongol : TwoArgFunction() {
             var noCommaBeforeFirst = true
             while (documentIterator.hasNext()) {
                 val f = documentIterator.next()
+                println(Bot.gson.toJson(f))
                 if (omitFirstN <= 0) {
                     if (!noCommaBeforeFirst)
                         str += ","

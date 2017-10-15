@@ -1,19 +1,18 @@
 package net.nander.botproject.integrations
 
-import com.google.gson.Gson
 import net.nander.botproject.Bot
 import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.OneArgFunction
 import org.luaj.vm2.lib.ThreeArgFunction
 import org.luaj.vm2.lib.TwoArgFunction
 import org.telegram.telegrambots.api.methods.send.SendMessage
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 
 /**
  * Created by nander on 13-10-17.
  */
+@Suppress("unused", "ClassName")
 class Telegram : TwoArgFunction() {
 
     override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
