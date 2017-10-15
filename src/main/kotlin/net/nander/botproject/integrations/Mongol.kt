@@ -44,7 +44,6 @@ class Mongol : TwoArgFunction() {
             var noCommaBeforeFirst = true
             while (documentIterator.hasNext()) {
                 val f = documentIterator.next()
-                println(Bot.gson.toJson(f))
                 if (omitFirstN <= 0) {
                     if (!noCommaBeforeFirst)
                         str += ","

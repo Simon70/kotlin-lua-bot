@@ -46,7 +46,7 @@ class Bot : TelegramLongPollingBot() {
                 while (true) {
                     try {
                         JsePlatform.standardGlobals().load("require 'scripts/bot'.start()").call()
-                    } catch (e: Exception) {
+                    } catch (e: Error) {
                         e.printStackTrace()
                     }
                     println("Offline")
