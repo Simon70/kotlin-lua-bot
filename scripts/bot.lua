@@ -12,22 +12,26 @@ local helper = require 'scripts.helpers.scripts'
 helper.addCommands(commands, require 'scripts.commands.say')
 helper.addCommands(commands, require 'scripts.commands.player')
 helper.addCommands(commands, require 'scripts.commands.location')
+helper.addCommands(commands, require 'scripts.commands.debug')
+
 local PLE = require 'scripts.entities.player'
 local LLE = require 'scripts.entities.location'
 local WLE = require 'scripts.entities.world'
 
 local function execute(func, _, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
-        func.call(var, update, P, L, W)
         print("Calling", func.name)
+        return func.call(var, update, P, L, W)
     end
 end
 
 bot.start = function()
-    while(true) do
+    while (true) do
         local msg = json.parse(TELEGRAM.getNextMessage(TICKRATE))
-        if(msg ~= nil) then
-            bot.cmd(msg)
+        if (msg ~= nil) then
+            if bot.cmd(msg) then
+                return
+            end
         else
             bot.tick()
         end
@@ -47,13 +51,16 @@ bot.cmd = function(update)
     local P = PLE.getPlayer(update)
     local L = LLE.getLocation(P)
     local W = WLE.getWorld(P)
-
+    local test = false
     local split = helper.split(update.message.text)
     for _, v in ipairs(commands) do
         local b, newSplit = v[1](split, update.message.text)
+
         if b then
-            execute(v[2], update.message.text, newSplit, update, P, L, W)
+            local r = execute(v[2], update.message.text, newSplit, update, P, L, W)
+            test = test or r
         end
     end
+    return test
 end
 return bot

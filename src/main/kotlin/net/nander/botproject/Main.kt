@@ -54,7 +54,16 @@ class Bot : TelegramLongPollingBot() {
 
         object : Thread() {
             override fun run() {
-                JsePlatform.standardGlobals().load("require 'scripts/bot'.start()").call()
+                while (true) {
+                    try {
+                        JsePlatform.standardGlobals().load("require 'scripts/bot'.start()").call()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    println("Offline")
+                    Thread.sleep(1000)
+                    println("Restarting")
+                }
             }
         }.start()
 
