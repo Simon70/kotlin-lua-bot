@@ -22,7 +22,7 @@ class Telegram : TwoArgFunction() {
 
     internal class sendMessage : TwoArgFunction() {
         override fun call(id: LuaValue?, message: LuaValue?): LuaValue {
-            Bot.server!!.sendMessage(SendMessage(id!!.tolong(), message.toString()))
+            Bot.server!!.execute(SendMessage(id!!.tolong(), message.toString()))
             return LuaValue.NIL
         }
     }
@@ -30,7 +30,7 @@ class Telegram : TwoArgFunction() {
     internal class sendReplyMessage : ThreeArgFunction() {
         override fun call(id: LuaValue?, replyTo: LuaValue?, message: LuaValue?): LuaValue {
             val reply = replyTo!!.toint()
-            Bot.server!!.sendMessage(SendMessage(id!!.tolong(), message.toString()).setReplyToMessageId(reply))
+            Bot.server!!.execute(SendMessage(id!!.tolong(), message.toString()).setReplyToMessageId(reply))
             return LuaValue.NIL
         }
     }

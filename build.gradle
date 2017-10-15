@@ -1,4 +1,4 @@
-group 'org.simonscode'
+group 'net.nander'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -25,7 +25,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "com.google.code.gson:gson:2.6.2"
     compile "org.telegram:telegrambots:3.3"
-    compile 'com.github.thjomnx:java-systemd:1.0.0'
 }
 
 compileKotlin {

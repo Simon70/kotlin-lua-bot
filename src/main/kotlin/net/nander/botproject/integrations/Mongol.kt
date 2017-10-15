@@ -25,34 +25,34 @@ class Mongol : TwoArgFunction() {
 
     internal class getData : TwoArgFunction() {
         override fun call(x: LuaValue?, file: LuaValue?): LuaValue {
-            val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
-            if (Doc.first() == null)
+            val documentCollection = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
+            if (documentCollection.first() == null)
                 return LuaValue.NIL
-            val a = Doc.first()[file.toString()].toString()
-            if (a == "null")
+            val data = documentCollection.first()[file.toString()].toString()
+            if (data == "null")
                 return LuaValue.NIL
-            return LuaValue.valueOf(a)
+            return LuaValue.valueOf(data)
         }
     }
 
     internal class getAllData : OneArgFunction() {
         override fun call(x: LuaValue?): LuaValue {
-            val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
-            val d = Doc.iterator().next()
-            val e = d.iterator()
+            val documentCollection = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
+            val document = documentCollection.iterator().next()
+            val documentIterator = document.iterator()
             var str = "{"
-            var first = 2
-            var second = true
-            while (e.hasNext()) {
-                val f = e.next()
-                if (first <= 0) {
-                    if (!second)
+            var omitFirstN = 2
+            var noCommaBeforeFirst = true
+            while (documentIterator.hasNext()) {
+                val f = documentIterator.next()
+                if (omitFirstN <= 0) {
+                    if (!noCommaBeforeFirst)
                         str += ","
                     str += f.key + ":" + f.value
-                    second = false
+                    noCommaBeforeFirst = false
                 }
 
-                first--
+                omitFirstN--
             }
             str += "}"
             println(str)
@@ -62,8 +62,8 @@ class Mongol : TwoArgFunction() {
 
     internal class setData : ThreeArgFunction() {
         override fun call(x: LuaValue?, file: LuaValue?, y: LuaValue?): LuaValue {
-            val Doc = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
-            if (Doc.first() == null)
+            val documentCollection = MongolDatabaseConnector.collection.find(Filters.eq("title", x.toString()))
+            if (documentCollection.first() == null)
                 MongolDatabaseConnector.collection.insertOne(Document("title", x.toString()).append(file.toString(), y.toString()))
             else
                 MongolDatabaseConnector.collection.findOneAndUpdate(Filters.eq("title", x.toString()), Updates.set(file.toString(), y.toString()))
