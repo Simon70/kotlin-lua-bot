@@ -1,7 +1,7 @@
 --
 -- Main entry point for bot
 --
-
+local TICKRATE = 100
 local bot = {}
 DATA = require('scripts.DATASTORE')
 TELEGRAM = require('net.nander.botproject.integrations.Telegram')
@@ -20,6 +20,22 @@ local function execute(func, _, var, update, P, L, W)
         func.call(var, update, P, L, W)
         print("Calling", func.name)
     end
+end
+
+bot.start = function()
+    while(true) do
+        local msg = json.parse(TELEGRAM.getNextMessage(TICKRATE))
+        if(msg ~= nil) then
+            print(msg)
+            bot.cmd(msg)
+        else
+            bot.tick()
+        end
+    end
+end
+
+bot.tick = function()
+    print("HERE")
 end
 
 bot.cmd = function(update)

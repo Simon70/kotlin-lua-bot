@@ -1,10 +1,14 @@
 package net.nander.botproject.integrations
 
+import com.google.gson.Gson
 import net.nander.botproject.Bot
 import org.luaj.vm2.LuaValue
+import org.luaj.vm2.lib.OneArgFunction
 import org.luaj.vm2.lib.ThreeArgFunction
 import org.luaj.vm2.lib.TwoArgFunction
 import org.telegram.telegrambots.api.methods.send.SendMessage
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -16,6 +20,7 @@ class Telegram : TwoArgFunction() {
         val library = LuaValue.tableOf()
         library.set("sendMessage", sendMessage())
         library.set("sendReplyMessage", sendReplyMessage())
+        library.set("getNextMessage", getNextMessage())
         env!!.set("sendMessage", library)
         return library
     }
@@ -35,4 +40,16 @@ class Telegram : TwoArgFunction() {
         }
     }
 
+    internal class getNextMessage : OneArgFunction() {
+        override fun call(id: LuaValue?): LuaValue {
+            if(id != null) {
+                val msg = Bot.messageQueue.poll(id.tolong(), TimeUnit.MILLISECONDS) ?: return LuaValue.NIL
+                val gson = Gson()
+                val json = gson.toJson(msg)
+                return LuaValue.valueOf(json)
+
+            }
+            return LuaValue.NIL
+        }
+    }
 }

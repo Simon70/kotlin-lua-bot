@@ -1,6 +1,8 @@
 package net.nander.botproject
 
 import com.google.gson.Gson
+import com.mongodb.client.MongoCollection
+import org.bson.Document
 import org.luaj.vm2.lib.jse.JsePlatform
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
@@ -9,6 +11,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.exceptions.TelegramApiException
 import java.io.File
 import java.nio.charset.Charset
+import java.util.concurrent.LinkedBlockingQueue
 
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
@@ -22,6 +25,8 @@ class Bot : TelegramLongPollingBot() {
 
     companion object {
         var server: TelegramLongPollingBot? = null
+        val messageQueue: LinkedBlockingQueue<Update> = LinkedBlockingQueue()
+
     }
 
     init {
@@ -45,6 +50,19 @@ class Bot : TelegramLongPollingBot() {
         if (token == null) throw Exception("No token!")
         if (username == null) throw Exception("No Username!")
         println("Starting " + username)
+
+        object : Thread() {
+            override fun run() {
+                val globals = JsePlatform.standardGlobals()
+
+                val chunk = globals.load("" +
+                        "json = require 'scripts/DATASTORE'\n" +
+                        "bot = require 'scripts/bot'\n" +
+                        "local c = (json.parse(({...})[1]))\n" +
+                        "bot.start()")
+                chunk.call()            }
+        }.start()
+
     }
 
     override fun getBotToken(): String {
@@ -57,22 +75,7 @@ class Bot : TelegramLongPollingBot() {
 
     override fun onUpdateReceived(update: Update?) {
         if (update != null) {
-            val gson = Gson()
-            var json = gson.toJson(update)
-            val globals = JsePlatform.standardGlobals()
-
-            val chunk = globals.load("" +
-                    "json = require 'scripts/DATASTORE'\n" +
-                    "bot = require 'scripts/bot'\n" +
-                    "local c = (json.parse(({...})[1]))\n" +
-                    "bot.cmd(c)")
-            chunk.call(json)
-
-            try {
-
-            } catch (e: TelegramApiException) {
-                e.printStackTrace()
-            }
+            messageQueue.add(update)
         }
     }
 }

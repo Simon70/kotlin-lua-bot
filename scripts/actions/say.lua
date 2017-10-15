@@ -12,7 +12,9 @@ SAY.say = {
         for k, v in pairs(d) do
             print(v.location, player.location)
             if (v.location == player.location and k ~= player.id) then
-                TELEGRAM.sendMessage(k, player.name .. ": " .. l[2])
+                if (k >= 0) then
+                    TELEGRAM.sendMessage(k, player.name .. ": " .. l[2])
+                end
             end
         end
     end
