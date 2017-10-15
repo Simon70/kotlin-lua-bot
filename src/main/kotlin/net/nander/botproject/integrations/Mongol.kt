@@ -16,9 +16,7 @@ class Mongol : TwoArgFunction() {
         val library = LuaValue.tableOf()
         library.set("getData", getData())
         library.set("getAllData", getAllData())
-
         library.set("setData", setData())
-
         env!!.set("mongo", library)
         return library
     }
@@ -51,7 +49,6 @@ class Mongol : TwoArgFunction() {
                     str += f.key + ":" + f.value
                     noCommaBeforeFirst = false
                 }
-
                 omitFirstN--
             }
             str += "}"
