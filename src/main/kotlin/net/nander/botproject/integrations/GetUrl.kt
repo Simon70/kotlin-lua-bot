@@ -13,7 +13,7 @@ class GetUrl : TwoArgFunction() {
     override fun call(moduleName: LuaValue, env: LuaValue?): LuaValue {
         val library = LuaValue.tableOf()
         library.set("GET", GET())
-        env!!.set("mongo", library)
+        env!!.set("getUrl", library)
         return library
     }
 

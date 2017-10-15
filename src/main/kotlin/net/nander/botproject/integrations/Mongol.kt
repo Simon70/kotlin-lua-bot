@@ -54,7 +54,6 @@ class Mongol : TwoArgFunction() {
                 omitFirstN--
             }
             str += "}"
-            println(str)
             return LuaValue.valueOf(str)
         }
     }
