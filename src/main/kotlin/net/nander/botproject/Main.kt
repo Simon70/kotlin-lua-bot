@@ -30,7 +30,12 @@ class Bot : TelegramLongPollingBot() {
         val gson = Gson()
     }
 
+    /**
+     * Main entry point
+     */
     init {
+
+        // Load config
         server = this
         if (config.exists()) {
             val lines = config.readLines(Charset.defaultCharset())
@@ -46,6 +51,10 @@ class Bot : TelegramLongPollingBot() {
         if (token == null) throw Exception("No token!")
         println("Starting bot...")
 
+
+        /**
+         * Message handling thread: This is where the lua lives.
+         */
         object : Thread() {
             override fun run() {
                 while (true) {
