@@ -9,12 +9,16 @@ json = require 'scripts/DATASTORE'
 
 local commands = {}
 local helper = require 'scripts.helpers.scripts'
-helper.addCommands(commands, require 'scripts.modules.say.commands')
-helper.addCommands(commands, require 'scripts.modules.player.commands')
-helper.addCommands(commands, require 'scripts.modules.location.commands')
-helper.addCommands(commands, require 'scripts.modules.debug.commands')
-helper.addCommands(commands, require 'scripts.modules.station.commands')
-
+local a = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("modules"))
+local b = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("modules_private"))
+for _, v in ipairs(a) do
+    helper.addCommands(commands, require ('scripts.modules.' .. v .. '.commands'))
+    print("Loaded module : "..v)
+end
+for _, v in ipairs(b) do
+    helper.addCommands(commands, require ('scripts.modules_private.' .. v .. '.commands'))
+    print("Loaded private module : "..v)
+end
 local PLE = require 'scripts.modules.player.entities'
 local LLE = require 'scripts.modules.location.entities'
 local WLE = require 'scripts.modules.world.entities'
