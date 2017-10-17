@@ -28,8 +28,6 @@ for _, v in ipairs(private_modules) do
     print("Loaded private module : "..v)
 end
 
-
-
 local function execute(func, _, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
         print("Calling", func.name)
