@@ -70,6 +70,7 @@ class Telegram : TwoArgFunction() {
         /**
          * Sends a message
          * @param millis lua-value of the time to poll.
+         * @return Nil
          */
         override fun call(millis: LuaValue?): LuaValue {
             if (millis != null) {
