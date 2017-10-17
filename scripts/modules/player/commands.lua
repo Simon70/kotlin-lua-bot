@@ -2,7 +2,7 @@
 -- Defines which commands are defined in the context player
 --
 local COMMANDS = require 'scripts.helpers.command'
-local PLA = require 'scripts.actions.player'
+local PLA = require 'scripts.modules.player.actions'
 local PLAYER = {}
 
 PLAYER[#PLAYER + 1] = { COMMANDS.zeroArg("/who"), PLA.who }

@@ -2,7 +2,7 @@
 -- Defines which actions can be taken within the context of location
 --
 local LOCATION = {}
-local LLE = require 'scripts.entities.location'
+local LLE = require 'scripts.modules.location.entities'
 local scripts = require 'scripts.helpers.scripts'
 
 LOCATION.teleport = {

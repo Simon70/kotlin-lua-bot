@@ -9,14 +9,15 @@ json = require 'scripts/DATASTORE'
 
 local commands = {}
 local helper = require 'scripts.helpers.scripts'
-helper.addCommands(commands, require 'scripts.commands.say')
-helper.addCommands(commands, require 'scripts.commands.player')
-helper.addCommands(commands, require 'scripts.commands.location')
-helper.addCommands(commands, require 'scripts.commands.debug')
+helper.addCommands(commands, require 'scripts.modules.say.commands')
+helper.addCommands(commands, require 'scripts.modules.player.commands')
+helper.addCommands(commands, require 'scripts.modules.location.commands')
+helper.addCommands(commands, require 'scripts.modules.debug.commands')
+helper.addCommands(commands, require 'scripts.modules.station.commands')
 
-local PLE = require 'scripts.entities.player'
-local LLE = require 'scripts.entities.location'
-local WLE = require 'scripts.entities.world'
+local PLE = require 'scripts.modules.player.entities'
+local LLE = require 'scripts.modules.location.entities'
+local WLE = require 'scripts.modules.world.entities'
 
 local function execute(func, _, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
@@ -42,7 +43,7 @@ bot.tick = function()
 end
 
 bot.cmd = function(update)
-    if not update.message.text then
+    if not update or not update.message or not update.message.text then
         print("Thanks for trying")
         return
     end
