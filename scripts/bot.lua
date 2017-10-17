@@ -1,27 +1,34 @@
 --
 -- Main entry point for bot
 --
-local TICKRATE = 100
-local bot = {}
 DATA = require('scripts.DATASTORE')
 TELEGRAM = require('net.nander.botproject.integrations.Telegram')
 json = require 'scripts/DATASTORE'
 
-local commands = {}
+local bot = {}
+
+local TICKRATE = 100
 local helper = require 'scripts.helpers.scripts'
-local a = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules"))
-local b = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules_private"))
-for _, v in ipairs(a) do
-    helper.addCommands(commands, require ('scripts.modules.' .. v .. '.commands'))
-    print("Loaded module : "..v)
-end
-for _, v in ipairs(b) do
-    helper.addCommands(commands, require ('scripts.modules_private.' .. v .. '.commands'))
-    print("Loaded private module : "..v)
-end
+
 local PLE = require 'scripts.modules.player.entities'
 local LLE = require 'scripts.modules.location.entities'
 local WLE = require 'scripts.modules.world.entities'
+
+-- Load commands
+COMMANDS = {}
+local modules = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules"))
+local private_modules = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules_private"))
+
+for _, v in ipairs(modules) do
+    helper.addCommands(COMMANDS, require ('scripts.modules.' .. v .. '.commands'))
+    print("Loaded module : "..v)
+end
+for _, v in ipairs(private_modules) do
+    helper.addCommands(COMMANDS, require ('scripts.modules_private.' .. v .. '.commands'))
+    print("Loaded private module : "..v)
+end
+
+
 
 local function execute(func, _, var, update, P, L, W)
     if (func.validator(var, update, P, L, W)) then
@@ -30,6 +37,8 @@ local function execute(func, _, var, update, P, L, W)
     end
 end
 
+
+-- Main entry point
 bot.start = function()
     while (true) do
         local msg = json.parse(TELEGRAM.getNextMessage(TICKRATE))
@@ -43,9 +52,11 @@ bot.start = function()
     end
 end
 
+-- Tick
 bot.tick = function()
 end
 
+-- Execute command
 bot.cmd = function(update)
     if not update or not update.message or not update.message.text then
         print("Thanks for trying")
@@ -58,7 +69,7 @@ bot.cmd = function(update)
     local W = WLE.getWorld(P)
     local test = false
     local split = helper.split(update.message.text)
-    for _, v in ipairs(commands) do
+    for _, v in ipairs(COMMANDS) do
         local b, newSplit = v[1](split, update.message.text)
 
         if b then

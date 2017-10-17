@@ -15,15 +15,4 @@ LOCATION.teleport = {
     end
 }
 
--- TODO
-LOCATION.move = {
-    name = "move",
-    validator = scripts.onlyHuman,
-    call = function(l, update, player, _, _)
-        player.location = l[2]
-        DATA.setDataFromChat("Player", update, player)
-        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Set Location to " .. l[2])
-    end
-}
-
 return LOCATION
