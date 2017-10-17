@@ -9,8 +9,8 @@ json = require 'scripts/DATASTORE'
 
 local commands = {}
 local helper = require 'scripts.helpers.scripts'
-local a = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("modules"))
-local b = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("modules_private"))
+local a = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules"))
+local b = DATA.parse(require 'net.nander.botproject.integrations.GetDirectories'.GET("scripts/modules_private"))
 for _, v in ipairs(a) do
     helper.addCommands(commands, require ('scripts.modules.' .. v .. '.commands'))
     print("Loaded module : "..v)

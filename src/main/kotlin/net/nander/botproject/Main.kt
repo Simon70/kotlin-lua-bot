@@ -10,11 +10,16 @@ import java.io.File
 import java.nio.charset.Charset
 import java.util.concurrent.LinkedBlockingQueue
 
+/**
+ * Main Entry Point
+ */
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
     TelegramBotsApi().registerBot(Bot())
 }
-
+/**
+ * The Bot
+ */
 class Bot : TelegramLongPollingBot() {
     private var config = File("config.properties")
     private var token: String? = null
@@ -55,17 +60,28 @@ class Bot : TelegramLongPollingBot() {
                 }
             }
         }.start()
-
     }
 
+    /**
+     * Gets the bot-token
+     * @return the Token
+     */
     override fun getBotToken(): String {
         return token ?: ""
     }
 
+    /**
+     * Gets the Username of the bot
+     * @return the Username
+     */
     override fun getBotUsername(): String {
         return me.userName ?: "NO USERNAME"
     }
 
+    /**
+     * Handles a single [Update] from a user
+     * @param update the Update to be handled
+     */
     override fun onUpdateReceived(update: Update?) {
         if (update != null) {
             messageQueue.add(update)

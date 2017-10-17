@@ -5,7 +5,7 @@ import com.mongodb.client.MongoCollection
 import org.bson.Document
 
 /**
- * Created by nander on 12-10-17.
+ * Connects with MongoDB
  */
 object MongolDatabaseConnector {
     val collection: MongoCollection<Document>
