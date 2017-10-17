@@ -41,7 +41,7 @@ class Telegram : TwoArgFunction() {
 
     internal class getNextMessage : OneArgFunction() {
         override fun call(id: LuaValue?): LuaValue {
-            if(id != null) {
+            if (id != null) {
                 val msg = Bot.messageQueue.poll(id.tolong(), TimeUnit.MILLISECONDS) ?: return LuaValue.NIL
                 val json = Bot.gson.toJson(msg)
                 return LuaValue.valueOf(json)

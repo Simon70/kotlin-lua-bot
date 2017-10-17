@@ -2,7 +2,6 @@ package net.nander.botproject.integrations
 
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
-import net.nander.botproject.Bot
 import net.nander.botproject.mongo.MongolDatabaseConnector
 import org.bson.Document
 import org.luaj.vm2.LuaValue
