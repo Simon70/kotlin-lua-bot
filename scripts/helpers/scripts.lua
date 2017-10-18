@@ -14,7 +14,7 @@ end
 
 -- Returns true if the sender of the update is a human.
 function scripts.onlyHuman(_, update)
-    return update.message.chat.id > 0
+    return update.chatId > 0
 end
 
 -- Adds all commands in the second list to the first list.

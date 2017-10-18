@@ -11,7 +11,7 @@ LOCATION.teleport = {
     call = function(l, update, player, _, _)
         player.location = l[2]
         DATA.setDataFromChat("Player", update, player)
-        TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Set Location to " .. l[2])
+        TELEGRAM.sendReplyMessage(update.chatId, update.messageId, "Set Location to " .. l[2])
     end
 }
 

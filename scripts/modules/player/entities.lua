@@ -8,9 +8,10 @@ local PLAYER = {}
 PLAYER.getPlayer = function(update)
     local d = DATA.getDataFromChat("Player", update)
     if not d then
-        d = { name = "YOUR NAME HERE", id = update.message.chat.id }
+        d = { name = "YOUR NAME HERE", id = update.chatId }
         DATA.setDataFromChat("Player", update, d)
     end
+
     return d
 end
 

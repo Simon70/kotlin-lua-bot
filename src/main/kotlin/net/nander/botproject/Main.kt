@@ -1,6 +1,7 @@
 package net.nander.botproject
 
 import com.google.gson.Gson
+import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.jse.JsePlatform
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
@@ -26,7 +27,7 @@ class Bot : TelegramLongPollingBot() {
 
     companion object {
         var server: TelegramLongPollingBot? = null
-        val messageQueue: LinkedBlockingQueue<Update> = LinkedBlockingQueue()
+        val messageQueue: LinkedBlockingQueue<LuaValue> = LinkedBlockingQueue()
         val gson = Gson()
     }
 
@@ -93,7 +94,16 @@ class Bot : TelegramLongPollingBot() {
      */
     override fun onUpdateReceived(update: Update?) {
         if (update != null) {
-            messageQueue.add(update)
+            val l = LuaValue.tableOf()
+            if(update.message != null && update.message.text != null) {
+                l.insert(1, LuaValue.valueOf(update.message.text))
+                l.insert(2, LuaValue.valueOf(update.message.chatId.toDouble()))
+                l.insert(3, LuaValue.valueOf(update.message.messageId.toDouble()))
+
+                messageQueue.add(l)
+
+            }
+
         }
     }
 }

@@ -16,7 +16,7 @@ json.getAllData = function(a)
     return b
 end
 json.getDataFromChat = function(a, update)
-    return json.getData(a, update.message.chat.id)
+    return json.getData(a, update.chatId)
 end
 
 json.setData = function(a, b, c)
@@ -24,7 +24,7 @@ json.setData = function(a, b, c)
 end
 
 json.setDataFromChat = function(a, update, c)
-    json.setData(a, update.message.chat.id, c)
+    json.setData(a, update.chatId, c)
 end
 
 -- Their SHIT
