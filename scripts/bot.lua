@@ -63,7 +63,7 @@ bot.cmd = function(update)
     update.message.text = update.message.text:gsub("u0027", "'")
 
     local P = PLE.getPlayer(update)
-    local L = LLE.getLocation(P)
+    local L = LLE.getLocation(P, update)
     local W = WLE.getWorld(P)
     local test = false
     local split = helper.split(update.message.text)

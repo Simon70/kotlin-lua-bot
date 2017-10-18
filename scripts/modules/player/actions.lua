@@ -4,6 +4,7 @@
 local PLAYER = {}
 local scripts = require 'scripts.helpers.scripts'
 
+-- Set the name of the player.
 PLAYER.setName = {
     name = "setName",
     validator = scripts.onlyHuman,
@@ -15,10 +16,11 @@ PLAYER.setName = {
     end
 }
 
+-- get the name of the player
 PLAYER.who = {
     name = "who",
     validator = scripts.onlyHuman,
-    call = function(l, update, player, _, _)
+    call = function(_, update, player, _, _)
         TELEGRAM.sendReplyMessage(update.message.chat.id, update.message.messageId, "Your name is " .. player.name)
     end
 }

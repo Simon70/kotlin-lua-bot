@@ -4,6 +4,8 @@
 local DEBUG = {}
 local scripts = require 'scripts.helpers.scripts'
 
+
+-- Restart the server.
 DEBUG.restart = {
     name = "restart",
     validator = scripts.onlyHuman,
